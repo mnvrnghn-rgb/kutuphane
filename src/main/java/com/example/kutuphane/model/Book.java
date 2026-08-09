@@ -1,4 +1,4 @@
-package com.example.kutuphane;
+package com.example.kutuphane.model;
 
 import jakarta.persistence.*;
 import java.time.LocalDate;
