@@ -15,20 +15,18 @@ public class BookService {
     @Autowired
     private BookRepository bookRepository;
 
-    // Tüm kitapları listeleyen metot
     public DataResult<List<Book>> getAllBooks() {
         List<Book> books = bookRepository.findAll();
-        return new SuccessDataResult<List<Book>>(books, "Kitaplar listelendi");
+        return new SuccessDataResult<List<Book>>(books, "Kitaplar listelendi.");
     }
 
-    // Yeni kitap kaydeden metot
-    public DataResult<Book> saveBook(Book book) {
+    public DataResult<Book> createBook(Book book) {
         Book savedBook = bookRepository.save(book);
-        return new SuccessDataResult<Book>(savedBook, "Kitap başarıyla eklendi");
+        return new SuccessDataResult<Book>(savedBook, "Kitap başarıyla eklendi.");
     }
-    // Kategoriye göre kitapları listeleyen metot
+
     public DataResult<List<Book>> getBooksByCategory(String category) {
         List<Book> books = bookRepository.findByCategory(category);
-        return new SuccessDataResult<List<Book>>(books, "Kategoriye göre kitaplar listelendi");
+        return new SuccessDataResult<List<Book>>(books, "Kategoriye göre kitaplar listelendi.");
     }
 }

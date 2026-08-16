@@ -1,35 +1,27 @@
 package com.example.kutuphane.service;
 
-import com.example.kutuphane.model.Book;
-import com.example.kutuphane.repository.BookRepository;
+import com.example.kutuphane.model.Rental;
+import com.example.kutuphane.repository.RentalRepository;
 import com.example.kutuphane.result.DataResult;
-import com.example.kutuphane.result.Result;
 import com.example.kutuphane.result.SuccessDataResult;
-import com.example.kutuphane.result.SuccessResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 @Service
 public class RentalService {
 
     @Autowired
-    private BookRepository bookRepository;
+    private RentalRepository rentalRepository;
 
-    // Kitap kiralama metodu
-    public Result rentBook(Long bookId) {
-        Book book = bookRepository.findById(bookId).orElse(null);
+    public DataResult<Rental> rentBook(Rental rental) {
+        Rental savedRental = rentalRepository.save(rental);
+        return new SuccessDataResult<Rental>(savedRental, "Kitap başarıyla kiralandı.");
+    }
 
-        if (book == null) {
-            return new Result(false, "Kitap bulunamadı");
-        }
-
-        if (!book.getAvailable()) {
-            return new Result(false, "Bu kitap zaten kiralanmış");
-        }
-
-        book.setAvailable(false);
-        bookRepository.save(book);
-
-        return new SuccessResult("Kitap başarıyla kiralandı");
+    public DataResult<List<Rental>> getAllRentals() {
+        List<Rental> rentals = rentalRepository.findAll();
+        return new SuccessDataResult<List<Rental>>(rentals, "Kiralanan kitaplar listelendi.");
     }
 }
