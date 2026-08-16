@@ -26,4 +26,9 @@ public class BookService {
         Book savedBook = bookRepository.save(book);
         return new SuccessDataResult<Book>(savedBook, "Kitap başarıyla eklendi");
     }
+    // Kategoriye göre kitapları listeleyen metot
+    public DataResult<List<Book>> getBooksByCategory(String category) {
+        List<Book> books = bookRepository.findByCategory(category);
+        return new SuccessDataResult<List<Book>>(books, "Kategoriye göre kitaplar listelendi");
+    }
 }
