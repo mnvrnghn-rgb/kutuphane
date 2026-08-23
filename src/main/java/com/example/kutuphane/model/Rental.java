@@ -10,17 +10,12 @@ public class Rental {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private Long bookId;
+    // Book ile ilişkiyi kuruyoruz
+    @ManyToOne
+    @JoinColumn(name = "book_id", nullable = false)
+    private Book book;
+
     private String customerName;
-
-    public Rental() {
-    }
-
-    public Rental(Long id, Long bookId, String customerName) {
-        this.id = id;
-        this.bookId = bookId;
-        this.customerName = customerName;
-    }
 
     public Long getId() {
         return id;
@@ -30,12 +25,12 @@ public class Rental {
         this.id = id;
     }
 
-    public Long getBookId() {
-        return bookId;
+    public Book getBook() {
+        return book;
     }
 
-    public void setBookId(Long bookId) {
-        this.bookId = bookId;
+    public void setBook(Book book) {
+        this.book = book;
     }
 
     public String getCustomerName() {
